@@ -11,8 +11,8 @@ services:
       SPRING_DATA_MONGODB_PORT: 27017
       SPRING_DATA_MONGODB_DATABASE: productdb
     networks:
-      - common_network
+      - common
 
 networks:
-  common_network:
+  common:
     external: true
