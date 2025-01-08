@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-            maven 'maven-3.8.8' // Use the Maven version you defined in the Jenkins configuration
+            maven 'maven-3.9.9' // Use the Maven version you defined in the Jenkins configuration
     }
     environment {
         DOCKER_IMAGE = "product-service"
