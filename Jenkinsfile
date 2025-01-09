@@ -6,6 +6,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "product-service"
         DOCKER_TAG = "latest"
+        DOCKER_HOST = 'unix:///var/run/docker.sock'
     }
     stages {
         stage('Checkout') {
