@@ -30,11 +30,19 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                script {
-                    sh 'docker run -d -p 8070:8070 --name product-service $DOCKER_IMAGE:$DOCKER_TAG'
+                    steps {
+                        script {
+                            // Stop and remove the existing container if it exists
+                            sh '''
+                            if [ "$(docker ps -q -f name=$DOCKER_IMAGE)" ]; then
+                                docker stop $DOCKER_IMAGE
+                                docker rm $DOCKER_IMAGE
+                            fi
+                            '''
+                            // Run the new container
+                            sh 'docker run -d -p 8070:8070 --name $DOCKER_IMAGE $DOCKER_IMAGE:$DOCKER_TAG'
+                        }
+                    }
                 }
-            }
-        }
     }
 }
