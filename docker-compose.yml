@@ -1,5 +1,6 @@
 services:
   product-service:
+    image: product-service:latest
     container_name: product-service
     build:
       context: .
@@ -7,11 +8,18 @@ services:
     ports:
       - "8070:8070"
     environment:
+      SPRING_PROFILES_ACTIVE: docker  # Set the active profile
+      SERVER_PORT: 8070
       SPRING_DATA_MONGODB_HOST: mongo
       SPRING_DATA_MONGODB_PORT: 27017
       SPRING_DATA_MONGODB_DATABASE: productdb
+      TZ: Asia/Kolkata  # Set the time zone to IST
     networks:
       - common
+#    volumes:
+#      - ./application-docker.yml:/config/application.yml  # Mount the Docker-specific config
+    #volumes:
+      #- C:/Users/youdhbir/Learning/MNext/logs:/logs  # Mount the host logs directory to /logs in the container
 
 networks:
   common:

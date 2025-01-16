@@ -1,9 +1,9 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/productdb  # Local MongoDB connection
+      uri: mongodb://mongo:27017/productdb  # MongoDB connection in container
 server:
-  port: 7070
+  port: 8070
 management:
   endpoints:
     web:
