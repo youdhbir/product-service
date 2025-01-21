@@ -1,31 +1,28 @@
 <configuration>
+    <!-- Define a variable for the log file location -->
+    <property name="LOG_FILE" value="${LOG_FILE:-/var/log/app/product-service.log}"/>
 
-    <!-- Console Appender -->
+    <!-- Console appender for logs -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/app/product-service-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- File Appender -->
-<!--    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-<!--        <file>/logs/spring-boot-elk.log</file> &lt;!&ndash; Specify the log file name &ndash;&gt;-->
-<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-<!--            <fileNamePattern>/logs/spring-boot-elk.%d{yyyy-MM-dd}.log</fileNamePattern>-->
-<!--            <maxHistory>30</maxHistory>-->
-<!--        </rollingPolicy>-->
-<!--        <encoder>-->
-<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>-->
-<!--        </encoder>-->
-<!--    </appender>-->
 
-    <!-- Root Logger -->
+    <!-- Set the logging level and appenders -->
     <root level="INFO">
-        <appender-ref ref="CONSOLE" />
-<!--        <appender-ref ref="FILE" />-->
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
-
-    <!-- Example of setting log level for a specific package -->
-<!--    <logger name="com.example.yourpackage" level="DEBUG" />-->
-
 </configuration>
