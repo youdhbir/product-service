@@ -1,5 +1,5 @@
 <configuration>
-    <!-- Define a variable for the log file location -->
+    <!-- Define a variable for the log file location. This location is inside container -->
     <property name="LOG_FILE" value="${LOG_FILE:-/var/log/app/product-service.log}"/>
 
     <!-- Console appender for logs -->
